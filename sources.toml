@@ -13,24 +13,6 @@
 # records it in sources.lock.json; check rebuilds from the locked commits.
 
 [[source]]
-name = "gh-actions-lock"
-repo = "github/gh-actions-lock"
-branch = "main"
-path = "skills"
-license = "LICENSE"
-spdx = "MIT"
-skills = ["gh-actions-lock"]
-
-[[source]]
-name = "gh-stack"
-repo = "github/gh-stack"
-branch = "main"
-path = "skills"
-license = "LICENSE"
-spdx = "MIT"
-skills = ["gh-stack"]
-
-[[source]]
 name = "awesome-copilot"
 repo = "github/awesome-copilot"
 branch = "main"
@@ -38,30 +20,3 @@ path = "skills"
 license = "LICENSE"
 spdx = "MIT"
 skills = ["codeql"]
-
-[[source]]
-name = "gh-aw"
-repo = "github/gh-aw"
-branch = "main"
-path = ".github/skills"
-license = "LICENSE"
-spdx = "MIT"
-skills = ["github-discussion-query", "github-pr-query"]
-
-[[source]]
-name = "appium"
-repo = "appium/skills"
-branch = "main"
-path = "skills"
-license = "LICENSE"
-spdx = "Apache-2.0"
-skills = ["appium-troubleshooting", "prepare-development-environment", "setup", "xcuitest-real-device-config"]
-
-[[source]]
-name = "react-admin"
-repo = "marmelab/react-admin"
-branch = "master"
-path = ".agents/skills"
-license = "LICENSE.md"
-spdx = "MIT"
-skills = ["react-admin"]

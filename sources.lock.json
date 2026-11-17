@@ -1,39 +1,12 @@
 {
   "sources": {
-    "gh-actions-lock": {
-      "repo": "github/gh-actions-lock",
-      "branch": "main",
-      "commit": "90ae563599cf303ff91eb5b46277ff04f5d2b4fc"
-    },
-    "gh-stack": {
-      "repo": "github/gh-stack",
-      "branch": "main",
-      "commit": "80b6d6e910cc1b7eaa26b961d7721ade21084fed"
-    },
     "awesome-copilot": {
       "repo": "github/awesome-copilot",
       "branch": "main",
       "commit": "a06ba06d11f41b996f8c246e2a452e1bf3a17950"
-    },
-    "gh-aw": {
-      "repo": "github/gh-aw",
-      "branch": "main",
-      "commit": "373f85b6b927fa217c1902c86e03fcaabf8b4d0a"
-    },
-    "appium": {
-      "repo": "appium/skills",
-      "branch": "main",
-      "commit": "e907024c210fe024c956ed9c74146fc27b1dd013"
-    },
-    "react-admin": {
-      "repo": "marmelab/react-admin",
-      "branch": "master",
-      "commit": "d81f645c0235e940c7684dc1b1eb97eef4afcccb"
     }
   },
   "files": {
-    "skills/appium-troubleshooting/LICENSE": "100644 5cb791a45cafc4bdaef57f3ba49fb7691a98c756e8148467f9e241295728490f",
-    "skills/appium-troubleshooting/SKILL.md": "100644 2814e41699486dbde2519cd559d70913e6321928580fd75bd6397fa4e012598c",
     "skills/codeql/LICENSE": "100644 e32449d23085399adc1222f7a17408b730550258e51627c153cb108ca9955823",
     "skills/codeql/SKILL.md": "100644 81503394c7c0595756d18a47e0b626dfd1dc6cf4673d40e9be23349a66fa5d27",
     "skills/codeql/references/alert-management.md": "100644 998d51889e97525603519cc329b10b7e8887570b5bcedf66d8f4b4f466df192e",
@@ -41,28 +14,6 @@
     "skills/codeql/references/compiled-languages.md": "100644 4e2a5c5ef8e4d3191c22fc3d0f9fabf30d01a3ebf736e77101169aa1277dfb2d",
     "skills/codeql/references/sarif-output.md": "100644 c389d24b6ad3eff33ece4d79ec42ce7696cdc2a42d7dc3177d9506c64e3c8cb3",
     "skills/codeql/references/troubleshooting.md": "100644 018e8b0e57668ee9dcb159f0793324ee91128d0318f671624d84df5bac4d20d8",
-    "skills/codeql/references/workflow-configuration.md": "100644 76ed214c3b7eb827fea7d0c283b04f627ac0e4c23ee090e04ef5681001d3f96f",
-    "skills/gh-actions-lock/LICENSE": "100644 2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
-    "skills/gh-actions-lock/SKILL.md": "100644 cc0f9741782ad67c479e7409bafed300a7ba263402725bfe33e39304c803d669",
-    "skills/gh-stack/LICENSE": "100644 2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
-    "skills/gh-stack/SKILL.md": "100644 909ca0dc20d644f8ce2d1a5e0c266d71aa93d2ecac366e505d14d1e8e45795dd",
-    "skills/gh-stack/references/commands.md": "100644 f10d076868780913dc5f1ea26333dbdfc91c1a3c41e45fbc6a24fd6cba0b6929",
-    "skills/gh-stack/references/stack-design.md": "100644 4a61e3065ce61a5d129a30f5dcbebe73bfde250e34c382277facdc31d2c4e5ce",
-    "skills/gh-stack/references/troubleshooting.md": "100644 1a85094e2398f0d28b4e861f2af6e5a81e0553a0f44ddb51eb3dc6585b48e7f3",
-    "skills/github-discussion-query/LICENSE": "100644 2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
-    "skills/github-discussion-query/SKILL.md": "100644 cc8fe69403e305aebede7202eb4d806905525d576df0d2589cb433359d7d607e",
-    "skills/github-discussion-query/query-discussions.py": "100755 aeb8962db5ef11c0875056b8f13f09d78052dc9069b5a45356f9d9d9ac246bd0",
-    "skills/github-discussion-query/query-discussions.sh": "100755 0276089f7601830601225f8eb26ee62bc227b098668986708da3dca3435b4377",
-    "skills/github-pr-query/LICENSE": "100644 2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
-    "skills/github-pr-query/SKILL.md": "100644 19f63c4bdc30e52346ecf1db72e472d9f9624d6fda53c9acdc452e71fbc36d91",
-    "skills/github-pr-query/query-prs.sh": "100755 e3fa0968d8f4eb35db132808ccd228f1adf6194f18a9a6191fae9da3bb759718",
-    "skills/prepare-development-environment/LICENSE": "100644 5cb791a45cafc4bdaef57f3ba49fb7691a98c756e8148467f9e241295728490f",
-    "skills/prepare-development-environment/SKILL.md": "100644 c799a97dbdcb7b586904a5670706c86932b65a789a17cefb357c7e495f97ced2",
-    "skills/react-admin/LICENSE": "100644 7e911f566da7d1fb2ecaac204de5587538339902ebdceaac5e1f845c48c1981d",
-    "skills/react-admin/SKILL.md": "100644 6709e41bc2c97fcd632e0b731b4946eaef9af70ff8a8960ebbd66d4ded32c27d",
-    "skills/setup/LICENSE": "100644 5cb791a45cafc4bdaef57f3ba49fb7691a98c756e8148467f9e241295728490f",
-    "skills/setup/SKILL.md": "100644 8b232612fffe0e38900ad8f02ae1af985a9a6d0d3dd99073e52b056d55418e18",
-    "skills/xcuitest-real-device-config/LICENSE": "100644 5cb791a45cafc4bdaef57f3ba49fb7691a98c756e8148467f9e241295728490f",
-    "skills/xcuitest-real-device-config/SKILL.md": "100644 5a679799f32ab39c8ceff3e501ff4bb912c6537cde148e969dc1c367c84c1322"
+    "skills/codeql/references/workflow-configuration.md": "100644 76ed214c3b7eb827fea7d0c283b04f627ac0e4c23ee090e04ef5681001d3f96f"
   }
 }
