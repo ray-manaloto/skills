@@ -1,0 +1,14 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "ray-manaloto-skills",
+  "owner": {
+    "name": "ray-manaloto"
+  },
+  "plugins": [
+    {
+      "name": "skills",
+      "source": "./",
+      "description": "Unmodified copies of selected upstream agent skills, with their original licenses. Skills only: no MCP servers, hooks or credentials."
+    }
+  ]
+}

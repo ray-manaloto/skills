@@ -1,0 +1,9 @@
+{
+  "name": "skills",
+  "description": "Unmodified copies of selected upstream agent skills, with their original licenses. Skills only: no MCP servers, hooks or credentials.",
+  "author": {
+    "name": "ray-manaloto"
+  },
+  "homepage": "https://github.com/ray-manaloto/skills",
+  "repository": "https://github.com/ray-manaloto/skills"
+}

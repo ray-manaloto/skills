@@ -1,0 +1,67 @@
+# Upstream sources mirrored into skills/. Modeled on risu729/skills.
+#
+# Only the skills listed here are copied, unmodified. `exclude` names
+# subdirectories that are dropped from every skill of that source; nothing
+# inside a copied file is edited. `license` is the upstream file that grants
+# the license; it is copied into each skill directory as LICENSE unless the
+# skill already ships its own (`skill_license`).
+#
+# A skill belongs here only when its upstream offers no plugin marketplace;
+# otherwise install that plugin with each agent's native commands.
+#
+# scripts/skills.py update resolves each `branch` to its current commit and
+# records it in sources.lock.json; check rebuilds from the locked commits.
+
+[[source]]
+name = "gh-actions-lock"
+repo = "github/gh-actions-lock"
+branch = "main"
+path = "skills"
+license = "LICENSE"
+spdx = "MIT"
+skills = ["gh-actions-lock"]
+
+[[source]]
+name = "gh-stack"
+repo = "github/gh-stack"
+branch = "main"
+path = "skills"
+license = "LICENSE"
+spdx = "MIT"
+skills = ["gh-stack"]
+
+[[source]]
+name = "awesome-copilot"
+repo = "github/awesome-copilot"
+branch = "main"
+path = "skills"
+license = "LICENSE"
+spdx = "MIT"
+skills = ["codeql"]
+
+[[source]]
+name = "gh-aw"
+repo = "github/gh-aw"
+branch = "main"
+path = ".github/skills"
+license = "LICENSE"
+spdx = "MIT"
+skills = ["github-discussion-query", "github-pr-query"]
+
+[[source]]
+name = "appium"
+repo = "appium/skills"
+branch = "main"
+path = "skills"
+license = "LICENSE"
+spdx = "Apache-2.0"
+skills = ["appium-troubleshooting", "prepare-development-environment", "setup", "xcuitest-real-device-config"]
+
+[[source]]
+name = "react-admin"
+repo = "marmelab/react-admin"
+branch = "master"
+path = ".agents/skills"
+license = "LICENSE.md"
+spdx = "MIT"
+skills = ["react-admin"]
