@@ -83,8 +83,11 @@ later and Git are the only requirements.
 
 ## Repository settings the workflows rely on
 
-- Actions: "Allow GitHub Actions to create and approve pull requests" on, so
-  `sync.yml` can open its pull request with `GITHUB_TOKEN`.
+- A GitHub App with contents and pull-request write, installed on this
+  repository: its Client ID in the `SYNC_APP_CLIENT_ID` variable and its private
+  key in the `SYNC_APP_PRIVATE_KEY` secret. `sync.yml` opens its pull request
+  with a token from that App, limited to this repository, because the
+  organization does not let `GITHUB_TOKEN` open pull requests.
 - Pull requests: squash merging only, auto-merge allowed.
 - Ruleset on `main`: pull request with no required approvals, signed commits
   (GitHub signs squash merges), linear history, and the `CI Check` and CodeQL

@@ -19,9 +19,7 @@ jobs:
     runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
-      contents: write # push the sync branch
-      pull-requests: write # open the pull request and enable auto-merge
-      actions: write # dispatch CI for the sync branch
+      contents: read # for checkout; the App token below pushes and opens the PR
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -34,9 +32,22 @@ jobs:
           --auto-merge-flag "${RUNNER_TEMP}/auto-merge"
       - name: Validate the rebuilt mirror
         run: python3 scripts/skills.py check
+      # The org does not let GITHUB_TOKEN open pull requests, so a GitHub App
+      # token does. It is limited to this repository's contents and pull
+      # requests, and, unlike GITHUB_TOKEN, its pull requests start CI.
+      - name: Mint a GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.SYNC_APP_CLIENT_ID }}
+          private-key: ${{ secrets.SYNC_APP_PRIVATE_KEY }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
       - name: Open or refresh the sync pull request
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
         run: |
           pr="$(gh pr list --head "${SYNC_BRANCH}" --state open --json number --jq '.[0].number')"
           if [[ -z "$(git status --porcelain)" ]]; then
@@ -52,8 +63,9 @@ jobs:
             cat "${RUNNER_TEMP}/summary.md"
           } > "${RUNNER_TEMP}/body.md"
           gh auth setup-git
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          bot_id="$(gh api "/users/${APP_SLUG}%5Bbot%5D" --jq .id)"
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${bot_id}+${APP_SLUG}[bot]@users.noreply.github.com"
           git switch --create "${SYNC_BRANCH}"
           git add --all
           git commit --quiet --message "chore: sync upstream skills"
@@ -69,9 +81,6 @@ jobs:
             gh pr create --head "${SYNC_BRANCH}" --base main \
               --title "chore: sync upstream skills" --body-file "${RUNNER_TEMP}/body.md"
           fi
-          # Pull requests opened with GITHUB_TOKEN start no pull_request
-          # workflows; workflow_dispatch is the documented exception.
-          gh workflow run ci.yml --ref "${SYNC_BRANCH}"
           # Only Markdown and license changes merge without review. Scripts
           # and other files wait for a person.
           if [[ "${auto_merge}" == "true" ]]; then
