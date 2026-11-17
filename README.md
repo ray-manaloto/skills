@@ -6,7 +6,7 @@ repository serves the same skills to every client and follows upstream
 updates.
 
 This is a personal, unofficial mirror. It is not affiliated with or endorsed
-by GitHub, Appium, Marmelab or any other upstream author.
+by GitHub or any other upstream author.
 
 ## What is included
 
