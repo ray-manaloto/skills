@@ -1,0 +1,9 @@
+{
+  "name": "fleet-agents",
+  "description": "Two subagents for a Claude lead: a Haiku scout that maps code and a Sonnet implementer that makes one specified change. Agents only: no hooks, MCP servers or credentials.",
+  "author": {
+    "name": "ray-manaloto"
+  },
+  "homepage": "https://github.com/ray-manaloto/skills",
+  "repository": "https://github.com/ray-manaloto/skills"
+}

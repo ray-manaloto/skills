@@ -14,9 +14,24 @@ The skills listed in [`sources.toml`](sources.toml), copied from the upstream
 commits pinned in [`sources.lock.json`](sources.lock.json). See
 [NOTICE.md](NOTICE.md) for each skill's source, commit and license.
 
-The plugin adds instructions only. It contains no MCP servers, hooks, apps,
-commands or credentials, and the check fails if a mirrored skill or a manifest
-adds any of them.
+The `skills` plugin adds instructions only. It contains no MCP servers, hooks,
+apps, commands or credentials, and the check fails if a mirrored skill or a
+manifest adds any of them.
+
+## The fleet-agents plugin
+
+[`plugins/fleet-agents`](plugins/fleet-agents) is the repository's own second
+plugin, not a mirror. It holds two subagents for a Claude lead and no skills,
+hooks, MCP servers or credentials:
+
+- `scout` (Haiku; Read, Glob, Grep): maps files, call sites and tests and
+  returns paths with line ranges. It makes no edits and no designs.
+- `implementer` (Sonnet; Read, Glob, Grep, Edit, Write, Bash): makes one
+  specified step in the lead's worktree and runs only the named tests. It
+  carries the fleet rules: no sudo, `--privileged`, docker, ssh, commit, push,
+  stash, pull request, `gh` write or public text.
+
+Claude Code only: Codex and Antigravity read the `skills` plugin.
 
 ## Licenses
 
@@ -41,6 +56,7 @@ Each agent installs it with its own plugin commands, for example Claude Code:
 ```sh
 claude plugin marketplace add ray-manaloto/skills
 claude plugin install skills@ray-manaloto-skills
+claude plugin install fleet-agents@ray-manaloto-skills
 ```
 
 Codex reads the same Claude-format marketplace (`codex plugin marketplace add ray-manaloto/skills`), and the

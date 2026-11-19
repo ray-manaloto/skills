@@ -9,6 +9,11 @@
       "name": "skills",
       "source": "./",
       "description": "Unmodified copies of selected upstream agent skills, with their original licenses. Skills only: no MCP servers, hooks or credentials."
+    },
+    {
+      "name": "fleet-agents",
+      "source": "./plugins/fleet-agents",
+      "description": "Two subagents for a Claude lead: a Haiku scout that maps code and a Sonnet implementer that makes one specified change. Agents only: no hooks, MCP servers or credentials."
     }
   ]
 }
