@@ -12,4 +12,4 @@ are granted.
 
 | Skill | Upstream | Path | Commit | License | Excluded |
 | --- | --- | --- | --- | --- | --- |
-| `codeql` | [github/awesome-copilot](https://github.com/github/awesome-copilot) | [`skills/codeql`](https://github.com/github/awesome-copilot/tree/a06ba06d11f41b996f8c246e2a452e1bf3a17950/skills/codeql) | `a06ba06` | MIT | none |
+| `codeql` | [github/awesome-copilot](https://github.com/github/awesome-copilot) | [`skills/codeql`](https://github.com/github/awesome-copilot/tree/f10fdb8b2660ce85c98f220b2f1ca24653768a5c/skills/codeql) | `f10fdb8` | MIT | none |
