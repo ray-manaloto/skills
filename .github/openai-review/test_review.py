@@ -119,3 +119,54 @@ class ReviewTests(unittest.TestCase):
         for output in ({"status": "incomplete"}, {"status": "completed", "output": []}):
             with self.assertRaises(review.ReviewError):
                 review.response_text(output)
+
+    def test_claude_uses_only_messages_and_renders_summary(self):
+        response = {
+            "type": "message",
+            "stop_reason": "end_turn",
+            "content": [{"type": "text", "text": "Check <boundary>."}],
+        }
+        send = Mock(side_effect=[pr(), [item()], pr(), response])
+        review.run(dict(self.env, REVIEW_PROVIDER="claude"), send)
+        self.assertEqual(send.call_count, 4)
+        endpoint, key = send.call_args.args
+        self.assertEqual(endpoint, review.CLAUDE_ENDPOINT)
+        self.assertEqual(key, self.env["REVIEW_API_KEY"])
+        body = send.call_args.kwargs["body"]
+        self.assertEqual(body["model"], review.CLAUDE_MODEL)
+        self.assertEqual(body["max_tokens"], 1800)
+        self.assertNotIn("tools", body)
+        self.assertEqual(body["messages"][0]["role"], "user")
+        self.assertEqual(
+            json.loads(body["messages"][0]["content"])[0]["path"], "src/file.cpp"
+        )
+        self.assertIn("Check &lt;boundary&gt;.", self.summary.read_text())
+
+    def test_claude_rejects_partial_results_and_unknown_providers(self):
+        with self.assertRaises(review.ReviewError):
+            review.claude_text({"type": "message", "stop_reason": "max_tokens"})
+        send = Mock()
+        with self.assertRaises(review.ReviewError):
+            review.run(dict(self.env, REVIEW_PROVIDER="unsupported"), send)
+        send.assert_not_called()
+
+    def test_claude_sends_documented_headers_only_to_claude(self):
+        from unittest.mock import patch
+
+        with patch("review.urllib.request.build_opener") as build_opener:
+            opener = build_opener.return_value
+            opener.open.return_value.__enter__.return_value.read.return_value = b"{}"
+            review.request_json(
+                review.CLAUDE_ENDPOINT, "fake-key", body={"max_tokens": 10}
+            )
+            request = opener.open.call_args.args[0]
+            headers = {name.lower(): value for name, value in request.header_items()}
+            self.assertEqual(headers["anthropic-version"], "2026-10-21")
+            self.assertEqual(headers["authorization"], "Bearer fake-key")
+            self.assertEqual(request.get_method(), "POST")
+            review.request_json(review.OPENAI_ENDPOINT, "fake-openai", body={})
+            request = opener.open.call_args.args[0]
+            self.assertNotIn(
+                "anthropic-version",
+                {name.lower() for name, _ in request.header_items()},
+            )

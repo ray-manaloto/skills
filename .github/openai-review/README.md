@@ -19,3 +19,16 @@ guarantee a cost-free run. Review only material you are permitted to send.
 The sensitive-content checks are a precaution, not a guarantee: don't review
 patches containing secrets or restricted content. Oversized, unavailable,
 or incomplete patches fail rather than being silently truncated.
+
+## Claude API alternative
+
+Create a separate `claude-pr-review` environment with the same default-branch
+restriction and no tag rules. Add only `ANTHROPIC_REVIEW_API_KEY` from a
+dedicated Claude Console workspace in the organization linked to your plan.
+Run **Actions → Claude PR review → Run workflow** on the default branch.
+
+This sends one bounded request directly to the Claude Messages API, which is
+eligible for linked-plan API credits. It does not use Claude Code Action,
+linked billing, or an OpenAI fallback. Verify the Console billing settings
+before running: purchased credits or auto-reload can keep usage going after
+the included credits are gone. The workflow does not change billing.
