@@ -1,0 +1,39 @@
+name: OpenAI PR review
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Open pull request targeting the default branch
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: openai-pr-review-${{ inputs.pr_number }}
+  cancel-in-progress: false
+
+jobs:
+  review:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: openai-pr-review
+    steps:
+      - name: Check out only the dispatched default-branch commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Run offline reviewer unit tests
+        run: python3 -B -m unittest discover -s .github/openai-review -p 'test_*.py'
+      - name: Review file patches
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEW_API_KEY: ${{ secrets.OPENAI_REVIEW_API_KEY }}
+        run: python3 -B .github/openai-review/review.py
